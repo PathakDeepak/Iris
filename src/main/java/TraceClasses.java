@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class TraceClasses
 {
-    public void printFileNames(File[] a, int i, int lvl, StringBuilder path, String outputFile)
+    public void printFileNames(File[] a, int i, int lvl, String path, String outputFile)
     {
         if(i == a.length)
         {
@@ -23,12 +23,13 @@ public class TraceClasses
         if(a[i].isFile())
         {
             String fileName = a[i].getName();
-            TraceClasses.executeCommands(path.toString(), fileName, outputFile);
+            TraceClasses.executeCommands(path, fileName, outputFile);
         }
         else if(a[i].isDirectory())
         {
-            path.append("/").append(a[i].getName()).append("/");
+            path = path + "/" + a[i].getName() + "/";
             printFileNames(Objects.requireNonNull(a[i].listFiles()), 0, lvl + 1, path, outputFile);
+            path = path.replaceFirst(a[i].getName() + "/", "");
         }
         printFileNames(a, i + 1, lvl, path, outputFile);
     }
@@ -47,7 +48,7 @@ public class TraceClasses
             System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
             System.out.println("Displaying Files from the directory: " + fObj);
             System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
-            obj.printFileNames(Objects.requireNonNull(a), 0, 0, new StringBuilder(absolutePath), outputFile);
+            obj.printFileNames(Objects.requireNonNull(a), 0, 0, absolutePath, outputFile);
         }
     }
 

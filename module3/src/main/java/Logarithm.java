@@ -1,3 +1,5 @@
+package test1;
+
 /**
  * @author valar_morghulis onumber 25/01/23.
  * @project multi-module-gradle
@@ -5,7 +7,7 @@
  */
 public class Logarithm {
 
-    static double log(double number, double base) {
+    public static double log(double number, double base) {
         double result = 0;
         while(number>1)
         {
